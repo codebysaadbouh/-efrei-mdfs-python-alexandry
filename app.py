@@ -6,7 +6,7 @@ import sqlite3
 def db_connection():
     conn_f = None
     try:
-        conn_f = sqlite3.connect('book.sqlite', check_same_thread=False)
+        conn_f = sqlite3.connect('books.sqlite', check_same_thread=False)
     except sqlite3.error as e:
         print(e)
     return conn_f
@@ -36,7 +36,7 @@ def books():
 
         sql = """INSERT INTO book (author, title, page_number) VALUES (?, ?, ?)"""
 
-        conn.execute(sql, (author, title, page_number))
+        cursors = cursor.execute(sql, (author, title, page_number))
         conn.commit()
         return jsonify(f"Book created successfully !"), 201
 
